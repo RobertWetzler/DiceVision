@@ -17,3 +17,23 @@ if __name__ == '__main__':
         cv2.imshow(f'frame {i}', frame_bgr)
         cv2.waitKey(0)
         cv2.destroyWindow(f'frame {i}')
+
+        img = im_seq[i]
+
+        a = 51
+        while a < 435:
+            b = 51
+            while b < 679:
+                if img[a][b] != 0:
+                    newDie = img[a-10:a+90, b-50:b+50]
+
+                    newIm = Image.fromarray(newDie)
+                    newIm.save("newDie.png")
+                    newIm.show()
+
+                    b = b + 100
+                    a = a + 100
+                else:
+                    b = b + 1
+            a = a + 1
+        print("done")
