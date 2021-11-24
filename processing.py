@@ -44,7 +44,7 @@ def clean_dice_video_seq(im_seq: np.ndarray) -> np.ndarray:
     im_seq_rgb_no_bg = np.copy(im_seq_rgb)
     for i, frame in enumerate(im_seq_rgb):
         mask = cv2.inRange(frame, lower_green, upper_green)
-        im_seq_rgb_no_bg[i][mask != 0] = [0, 0, 0]
+        im_seq_rgb_no_bg[i][mask != 0] = [255, 0, 0]
 
     # Remove small regions
     threshold = 100.
