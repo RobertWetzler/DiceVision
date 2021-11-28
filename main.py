@@ -1,3 +1,5 @@
+from time import sleep
+
 import cv2
 from processing import read_video, clean_dice_video_seq
 from dot_detection import detect_face
@@ -23,14 +25,19 @@ if __name__ == '__main__':
         bEnd = (int(b[0]) + 33, int(b[1]) + 33)
         firstDie = frame_bgr[aStart[1]:aEnd[1], aStart[0]:aEnd[0]]
         secondDie = frame_bgr[bStart[1]:bEnd[1], bStart[0]:bEnd[0]]
-        numOnFirstDice, throwAway1 = detect_face(firstDie)
-        numOnSecondDice, throwAway2 = detect_face(secondDie)
+        try:
+            numOnFirstDice, throwAway1 = detect_face(firstDie)
+            numOnSecondDice, throwAway2 = detect_face(secondDie)
+        except: #if error, skip frame
+            continue
         # Add the rectangles and text to the image, display it
         cv2.rectangle(im_seq_bgr[i], aStart, aEnd, (0, 0, 0), 2)
         cv2.rectangle(im_seq_bgr[i], bStart, bEnd, (0, 0, 0), 2)
         cv2.putText(im_seq_bgr[i], str(numOnFirstDice), aStart, cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
         cv2.putText(im_seq_bgr[i], str(numOnSecondDice), bStart, cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
-        cv2.namedWindow(f'frame: {i}, dots in frame: {num_dots}')
-        cv2.imshow(f'frame: {i}, dots in frame: {num_dots}', im_seq_bgr[i])
-        cv2.waitKey(0)
-        cv2.destroyWindow(f'frame {i}')
+        window_name = f'frame: {i}, dots in frame: {num_dots}'
+        cv2.namedWindow(window_name)
+        cv2.imshow(window_name, im_seq_bgr[i])
+        cv2.setWindowProperty(window_name, cv2.WND_PROP_TOPMOST, 1)
+        cv2.waitKey(1)
+        #cv2.destroyWindow(f'frame {i}')
