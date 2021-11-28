@@ -1,6 +1,8 @@
 import cv2
 
 
+REGION_MIN_SIZE = 70
+
 def dfs(img, x, y, label, region_stats):
     img[y, x] = label + 1
     region_stats[label]['x_sum'] += x
@@ -35,6 +37,10 @@ def connected_components(img):
                 x_mean = int(region_stats[label]['x_sum'] / region_stats[label]['count'])
                 y_mean = int(region_stats[label]['y_sum'] / region_stats[label]['count'])
                 region_stats[label]['center'] = (x_mean, y_mean)
+                if region_stats[label]['count'] < REGION_MIN_SIZE: #remove small regions
+                    del region_stats[label]
+                else:
+                    print(f"region size: {region_stats[label]['count']}")
     return label, region_stats
 
 
