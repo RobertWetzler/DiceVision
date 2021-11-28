@@ -39,8 +39,6 @@ def connected_components(img):
                 region_stats[label]['center'] = (x_mean, y_mean)
                 if region_stats[label]['count'] < REGION_MIN_SIZE: #remove small regions
                     del region_stats[label]
-                else:
-                    print(f"region size: {region_stats[label]['count']}")
     return label, region_stats
 
 
