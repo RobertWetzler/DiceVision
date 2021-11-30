@@ -1,6 +1,7 @@
 from dot_detection import detect_face
 from square_detectionKmeans import detect_squares
 import cv2
+from utility import show_error_window
 
 def doRest(allDots, frame_bgr, im_seq_bgr, num_dots, i):
     a, b = detect_squares(allDots)
@@ -28,10 +29,4 @@ def doRest(allDots, frame_bgr, im_seq_bgr, num_dots, i):
         cv2.waitKey(1)
         cv2.destroyWindow(window_name)
     except:  # if error, skip frame
-        cv2.putText(im_seq_bgr[i], "ERROR: Dice not settled", (187, 470), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
-        window_name = f'frame: {i}, dots in frame: {num_dots}'
-        cv2.namedWindow(window_name)
-        cv2.imshow(window_name, im_seq_bgr[i])
-        cv2.setWindowProperty(window_name, cv2.WND_PROP_TOPMOST, 1)
-        cv2.waitKey(1)
-        cv2.destroyWindow(window_name)
+        show_error_window(im_seq_bgr, i)
