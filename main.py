@@ -13,9 +13,10 @@ if __name__ == '__main__':
     im_seq_bgr = read_video('data/dice_video_1.mp4')
 
     im_seq = clean_dice_video_seq(im_seq_bgr)
+    prev_bgr = None
     for i, frame in enumerate(im_seq):
-        if i > 0 and is_still(im_seq[i], im_seq[i-1]):
-            frame_bgr = cv2.cvtColor(frame.astype('float32') / 255, cv2.COLOR_RGB2BGR)
+        frame_bgr = cv2.cvtColor(frame.astype('float32') / 255, cv2.COLOR_RGB2BGR)
+        if i > 0 and is_still(frame_bgr, prev_bgr):
             num_dots, dot_stats = detect_face(frame_bgr)
             allDots = []
 
@@ -26,3 +27,4 @@ if __name__ == '__main__':
             doRest(allDots, frame_bgr, im_seq_bgr, num_dots, i)
         else:
             show_error_window(im_seq_bgr, i)
+        prev_bgr = frame_bgr

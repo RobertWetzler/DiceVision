@@ -1,4 +1,4 @@
-DIFF_THRESH = 6000
+DIFF_THRESH = 150
 
 
 def is_still(img_a, img_b):
