@@ -1,7 +1,7 @@
 import cv2
 
 
-REGION_MIN_SIZE = 70
+REGION_MIN_SIZE = 20
 
 def dfs(img, x, y, label, region_stats):
     img[y, x] = label + 1
@@ -45,5 +45,4 @@ def connected_components(img):
 def detect_face(img):
     img = cv2.cvtColor(img.astype('float32'), cv2.COLOR_BGR2GRAY)
     num_dots, dot_stats = connected_components(img)
-    print(f'Dots detected: {num_dots}')
     return num_dots, dot_stats
