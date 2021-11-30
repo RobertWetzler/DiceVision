@@ -26,7 +26,7 @@ def doRest(allDots, frame_bgr, im_seq_bgr, num_dots, i):
         cv2.imshow(window_name, im_seq_bgr[i])
         cv2.setWindowProperty(window_name, cv2.WND_PROP_TOPMOST, 1)
         cv2.waitKey(1)
-        # cv2.destroyWindow(f'frame {i}')
+        cv2.destroyWindow(window_name)
     except:  # if error, skip frame
         cv2.putText(im_seq_bgr[i], "ERROR: Dice not settled", (187, 470), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
         window_name = f'frame: {i}, dots in frame: {num_dots}'
@@ -34,3 +34,4 @@ def doRest(allDots, frame_bgr, im_seq_bgr, num_dots, i):
         cv2.imshow(window_name, im_seq_bgr[i])
         cv2.setWindowProperty(window_name, cv2.WND_PROP_TOPMOST, 1)
         cv2.waitKey(1)
+        cv2.destroyWindow(window_name)
