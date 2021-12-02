@@ -1,4 +1,4 @@
-# Dice Detection Project for CSE 5524
+# Dice Detection Project
 Uses Python 3.9 to detect dice in an input video.
 
 Packages used are listed in requirements.txt. To install, use:
