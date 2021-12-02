@@ -17,8 +17,6 @@ def doRest(allDots, frame_bgr, im_seq_bgr, num_dots, i):
     aEnd = (int(a[0]) + 33, int(a[1]) + 33)
     bStart = (int(b[0]) - 33, int(b[1]) - 33)
     bEnd = (int(b[0]) + 33, int(b[1]) + 33)
-    firstDie = frame_bgr[aStart[1]:aEnd[1], aStart[0]:aEnd[0]]
-    secondDie = frame_bgr[bStart[1]:bEnd[1], bStart[0]:bEnd[0]]
     try:
         numOnFirstDice = dotsInRange(allDots, aStart[0], aEnd[0], aStart[1], aEnd[1])
         numOnSecondDice = dotsInRange(allDots, bStart[0], bEnd[0], bStart[1], bEnd[1])
